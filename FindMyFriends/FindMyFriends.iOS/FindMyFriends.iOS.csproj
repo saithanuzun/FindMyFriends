@@ -128,11 +128,14 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xam.Plugin.Geolocator">
+      <Version>4.5.0.6</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\FindMyFriends\FindMyFriends.csproj">
-      <Project>{59D1D1A0-B05C-4FDD-B49B-825EF38918FA}</Project>
+      <Project>{8C3B1518-D668-4481-93A7-FD22514456E3}</Project>
       <Name>FindMyFriends</Name>
     </ProjectReference>
   </ItemGroup>
