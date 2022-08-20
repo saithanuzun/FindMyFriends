@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using FindMyFriends.Views;
 
 namespace FindMyFriends
 {
@@ -10,7 +11,7 @@ namespace FindMyFriends
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new SignUpPage());
         }
 
         protected override void OnStart()

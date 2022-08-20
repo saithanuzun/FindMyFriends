@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FindMyFriends.Views.LoginPage"
+    BackgroundColor="#227093">
+
+    <ContentPage.Content>
+        <StackLayout Margin="0,20,0,0" Padding="0,20,20,0">
+
+        <Label Text="Find My Friends" HorizontalOptions="CenterAndExpand" Margin="10,100,10,200"></Label>
+        <Entry WidthRequest="300" HeightRequest="50" Placeholder="enter Phone Number"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
+        <Entry WidthRequest="300" HeightRequest="50" Placeholder="enter password" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
+
+        <Button Text="Login!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="30,10,30,10"></Button>
+        <Label Text="Dgo to SignUpPage" TextColor="#f7f1e3" HorizontalOptions="CenterAndExpand"></Label>
+        <Button Text="Log In!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10"></Button>
+        
+
+
+
+        </StackLayout>
+
+    </ContentPage.Content>
+        
+
+    
+</ContentPage>
+

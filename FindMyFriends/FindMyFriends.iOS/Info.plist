@@ -42,9 +42,5 @@
 	<string>Please Can I track you ?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please Can I track you ?</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
 </dict>
 </plist>
