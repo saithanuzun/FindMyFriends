@@ -1,21 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using FindMyFriends.Views;
 using Xamarin.Forms;
 
 namespace FindMyFriends.ViewModels
 {
-    public class SignUpPageViewModel : INotifyPropertyChanged
+    public class LoginPageViewModel : INotifyPropertyChanged
     {
         private string _username;
-        private string _phoneNumber;
         private string _password;
-        private string _password2;
-        private ICommand _signUpClickedCommand;
         private ICommand _loginClickedCommand;
+        private ICommand _signUpClickedCommand;
 
         public String Username
         {
@@ -27,32 +23,12 @@ namespace FindMyFriends.ViewModels
             }
         }
 
-        public String PhoneNumber
-        {
-            get => _phoneNumber;
-            set
-            {
-                _phoneNumber = value;
-                OnPropertyChanged();
-            }
-        }
-
         public String Password
         {
             get => _password;
             set
             {
                 _password = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public String Password2
-        {
-            get => _password2;
-            set
-            {
-                _password2 = value;
                 OnPropertyChanged();
             }
         }
@@ -90,20 +66,21 @@ namespace FindMyFriends.ViewModels
         }
 
 
-        public SignUpPageViewModel()
+
+        public LoginPageViewModel()
         {
 
         }
 
-        
-        public void SignUpClicked()
+        public void LoginClicked()
         {
 
         }
-        public async void LoginClicked()
+        public async void SignUpClicked()
         {
-            await App.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            await App.Current.MainPage.Navigation.PopAsync();
         }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;

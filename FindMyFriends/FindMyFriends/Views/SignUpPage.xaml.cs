@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FindMyFriends.ViewModels;
 
 using Xamarin.Forms;
 
@@ -10,7 +11,11 @@ namespace FindMyFriends.Views
         public SignUpPage()
         {
             InitializeComponent();
+            BindingContext = new SignUpPageViewModel();
         }
+
+
+        
     }
 }
 

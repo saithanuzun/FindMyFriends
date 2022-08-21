@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using FindMyFriends.ViewModels;
 using Xamarin.Forms;
 
 namespace FindMyFriends.Views
@@ -10,7 +10,9 @@ namespace FindMyFriends.Views
         public LoginPage()
         {
             InitializeComponent();
+            BindingContext = new LoginPageViewModel();
         }
+
     }
 }
 

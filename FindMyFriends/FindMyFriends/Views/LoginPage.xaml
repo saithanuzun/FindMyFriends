@@ -3,7 +3,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="FindMyFriends.Views.LoginPage"
-    BackgroundColor="#227093">
+    BackgroundColor="#227093"
+    NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
         <StackLayout Margin="0,20,0,0" Padding="0,20,20,0">
@@ -13,8 +14,8 @@
         <Entry WidthRequest="300" HeightRequest="50" Placeholder="enter password" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
 
         <Button Text="Login!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="30,10,30,10"></Button>
-        <Label Text="Dgo to SignUpPage" TextColor="#f7f1e3" HorizontalOptions="CenterAndExpand"></Label>
-        <Button Text="Log In!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10"></Button>
+        <Label Text="Create Account" TextColor="#f7f1e3" HorizontalOptions="CenterAndExpand"></Label>
+        <Button Command="{Binding SignUpClickedCommand}" Text="Sign Up!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10"></Button>
         
 
 

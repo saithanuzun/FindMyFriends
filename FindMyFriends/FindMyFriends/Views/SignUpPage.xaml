@@ -10,14 +10,15 @@
     <ContentPage.Content>
         <StackLayout Margin="0,20,0,0" Padding="0,20,20,0">
 
-        <Label Text="Find My Friends" TextTransform="Uppercase" HorizontalOptions="CenterAndExpand" Margin="10,100,10,200"></Label>
+        <Label Text="Find My Friends" TextTransform="Uppercase" HorizontalOptions="CenterAndExpand" Margin="10,50,10,200"></Label>
+        <Entry WidthRequest="300" HeightRequest="50" Placeholder="Enter Username"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
         <Entry WidthRequest="300" HeightRequest="50" Placeholder="Enter Phone Number"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
         <Entry WidthRequest="300" HeightRequest="50" Placeholder="Enter Password" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
         <Entry WidthRequest="300" HeightRequest="50" Placeholder="Enter Password Again" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
 
-        <Button Text="Sign Up!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10"></Button>
-        <Label Text="Do you Have An Account ?" TextColor="#f7f1e3" HorizontalOptions="CenterAndExpand"></Label>
-        <Button Text="Log In!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10"></Button>
+        <Button Text="Sign Up!" Command="{Binding SignUpClickedCommand}" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10"></Button>
+        <Label Text="Already Have An Account ?" TextColor="#f7f1e3" HorizontalOptions="CenterAndExpand"></Label>
+        <Button Text="Log In!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10" Command="{Binding LoginClickedCommand}"></Button>
 
         
 
