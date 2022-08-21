@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using FindMyFriends.Services;
 using Xamarin.Forms;
 
 namespace FindMyFriends.ViewModels
@@ -71,10 +72,10 @@ namespace FindMyFriends.ViewModels
         {
 
         }
-
         public void LoginClicked()
         {
-
+            FirebaseAuth Auth = new FirebaseAuth();
+            Auth.Login(Username, Password);
         }
         public async void SignUpClicked()
         {

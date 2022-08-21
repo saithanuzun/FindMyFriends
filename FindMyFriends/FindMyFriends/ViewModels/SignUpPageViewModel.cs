@@ -2,7 +2,9 @@
 using System.ComponentModel;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using FindMyFriends.Services;
 using FindMyFriends.Views;
 using Xamarin.Forms;
 
@@ -62,7 +64,7 @@ namespace FindMyFriends.ViewModels
             {
                 if (_signUpClickedCommand == null)
                 {
-                    _signUpClickedCommand = new Command(SignUpClicked);
+                    _signUpClickedCommand = new Command(SignUpClickedAsync);
                 }
                 return _signUpClickedCommand;
             }
@@ -72,6 +74,7 @@ namespace FindMyFriends.ViewModels
             }
 
         }
+
         public ICommand LoginClickedCommand
         {
             get
@@ -89,22 +92,26 @@ namespace FindMyFriends.ViewModels
 
         }
 
-
+        
         public SignUpPageViewModel()
         {
+            
+
 
         }
 
-        
-        public void SignUpClicked()
-        {
 
+        public void SignUpClickedAsync()
+        {
+            FirebaseAuth Auth = new FirebaseAuth();
+            Auth.SignUp(Username, Password);
+            
+           
         }
         public async void LoginClicked()
         {
             await App.Current.MainPage.Navigation.PushAsync(new LoginPage());
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

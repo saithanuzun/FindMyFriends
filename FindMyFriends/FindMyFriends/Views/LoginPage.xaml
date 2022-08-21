@@ -10,14 +10,12 @@
         <StackLayout Margin="0,20,0,0" Padding="0,20,20,0">
 
         <Label Text="Find My Friends" HorizontalOptions="CenterAndExpand" Margin="10,100,10,200"></Label>
-        <Entry WidthRequest="300" HeightRequest="50" Placeholder="enter Phone Number"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
-        <Entry WidthRequest="300" HeightRequest="50" Placeholder="enter password" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
+        <Entry Text="{Binding Username}" WidthRequest="300" HeightRequest="50" Placeholder="Enter E-mail"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
+        <Entry Text="{Binding Password}" WidthRequest="300" HeightRequest="50" Placeholder="Enter password" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
 
-        <Button Text="Login!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="30,10,30,10"></Button>
+        <Button Command="{Binding LoginClickedCommand}" Text="Login!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="30,10,30,10"></Button>
         <Label Text="Create Account" TextColor="#f7f1e3" HorizontalOptions="CenterAndExpand"></Label>
         <Button Command="{Binding SignUpClickedCommand}" Text="Sign Up!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10"></Button>
-        
-
 
 
         </StackLayout>

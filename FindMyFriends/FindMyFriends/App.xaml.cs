@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using FindMyFriends.Views;
+using Xamarin.Essentials;
 
 namespace FindMyFriends
 {
@@ -11,7 +12,15 @@ namespace FindMyFriends
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            var AccesToken = Preferences.Get("AccesToken",String.Empty);
+            if(AccesToken==String.Empty)
+            {
+                MainPage = new NavigationPage(new SignUpPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new HomePage());
+            }
 
         }
 
