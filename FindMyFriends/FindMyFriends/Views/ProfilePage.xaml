@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FindMyFriends.Views.ProfilePage"
+    BackgroundColor="#227093">
+
+    <ContentPage.Content>
+        <StackLayout >
+
+            <Image></Image>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Username"></Label>
+                <Label Text="{Binding Username}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="E-mail"></Label>
+                <Label Text="{Binding Email}"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Friends Count"></Label>
+                <Label Text="{Binding FriendsCount}"></Label>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

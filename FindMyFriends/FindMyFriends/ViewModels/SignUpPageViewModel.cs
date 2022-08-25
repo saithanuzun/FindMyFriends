@@ -4,8 +4,10 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using FindMyFriends.Models;
 using FindMyFriends.Services;
 using FindMyFriends.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FindMyFriends.ViewModels
@@ -13,7 +15,7 @@ namespace FindMyFriends.ViewModels
     public class SignUpPageViewModel : INotifyPropertyChanged
     {
         private string _username;
-        private string _phoneNumber;
+        private string _email;
         private string _password;
         private string _password2;
         private ICommand _signUpClickedCommand;
@@ -29,12 +31,12 @@ namespace FindMyFriends.ViewModels
             }
         }
 
-        public String PhoneNumber
+        public String Email
         {
-            get => _phoneNumber;
+            get => _email;
             set
             {
-                _phoneNumber = value;
+                _email = value;
                 OnPropertyChanged();
             }
         }
@@ -101,10 +103,35 @@ namespace FindMyFriends.ViewModels
         }
 
 
-        public void SignUpClickedAsync()
+        public async void SignUpClickedAsync()
         {
             FirebaseAuth Auth = new FirebaseAuth();
-            Auth.SignUp(Username, Password);
+            if(Password==Password2 && Username!=null && Email!=null)
+            {
+                if (await Auth.SignUp(Email, Password))
+                {
+                    User user = new User
+                    {
+                         UserID = Preferences.Get("Accestoken", string.Empty),
+                         Username = Username,
+                         Email = Email,
+                         Password = Password
+                    };
+
+                    
+
+                    await App.Current.MainPage.Navigation.PushAsync(new MyTabbedPage());
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+
+            }
+            
             
            
         }

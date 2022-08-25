@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FindMyFriends.Views.SettingsPage"
+    BackgroundColor="#227093">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label Text="Friends Count"></Label>
+            <Label Text="{Binding FriendsCount}"></Label>
+            <Label Text="Add Friend"></Label>
+            <Entry Placeholder="Enter Friend UID"></Entry>
+            <Button Text="Add"></Button>
+            <Label Text="Remove Friend"></Label>
+            <Entry Placeholder="Enter Friend UID"></Entry>
+            <Button Text="Remove"></Button>
+
+            
+
+
+
+            <Label Text="Change Password"></Label>
+            <Entry Placeholder="Enter Your Password"></Entry>
+            <Entry Placeholder="Enter New Password"></Entry>
+            <Button Text="Change"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

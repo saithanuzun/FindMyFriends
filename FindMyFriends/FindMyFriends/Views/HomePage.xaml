@@ -2,10 +2,15 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="FindMyFriends.Views.HomePage">
+    x:Class="FindMyFriends.Views.HomePage"
+    NavigationPage.HasNavigationBar="True"
+    BackgroundColor="#227093">
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="selam"></Label>
+            <ListView>
+
+            </ListView>
 
         </StackLayout>
         

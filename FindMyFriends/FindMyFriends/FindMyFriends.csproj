@@ -16,6 +16,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.7.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,5 +26,6 @@
   <ItemGroup>
     <None Remove="Xam.Plugin.Geolocator" />
     <None Remove="FirebaseAuthentication.net" />
+    <None Remove="Newtonsoft.Json" />
   </ItemGroup>
 </Project>

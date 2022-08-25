@@ -12,7 +12,7 @@
 
         <Label Text="Find My Friends" TextTransform="Uppercase" HorizontalOptions="CenterAndExpand" Margin="10,50,10,200"></Label>
         <Entry  Text="{Binding Username}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Username"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
-        <Entry Text="{Binding PhoneNumber}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Phone Number"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
+        <Entry Text="{Binding Email}" WidthRequest="300" HeightRequest="50" Placeholder="Enter E-mail"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
         <Entry Text="{Binding Password}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Password" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
         <Entry Text="{Binding Password2}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Password Again" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
 

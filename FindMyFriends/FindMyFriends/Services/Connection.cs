@@ -8,7 +8,7 @@ namespace FoodOrderingApp.Services
 {
     public class Connection
     {
-        FirebaseClient firebaseClient = new Firebase.Database.FirebaseClient(Constants.FirebaseApiUrl);
+        public FirebaseClient firebaseClient = new Firebase.Database.FirebaseClient(Constants.FirebaseApiUrl);
 
     }
 }

@@ -2,24 +2,27 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using FindMyFriends.Models;
 using FindMyFriends.Services;
+using FindMyFriends.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FindMyFriends.ViewModels
 {
     public class LoginPageViewModel : INotifyPropertyChanged
     {
-        private string _username;
+        private string _email;
         private string _password;
         private ICommand _loginClickedCommand;
         private ICommand _signUpClickedCommand;
 
-        public String Username
+        public String Email
         {
-            get => _username;
+            get => _email;
             set
             {
-                _username = value;
+                _email = value;
                 OnPropertyChanged();
             }
         }
@@ -72,10 +75,26 @@ namespace FindMyFriends.ViewModels
         {
 
         }
-        public void LoginClicked()
+        public async void LoginClicked()
         {
             FirebaseAuth Auth = new FirebaseAuth();
-            Auth.Login(Username, Password);
+            if(await Auth.Login(_email, Password))
+            {
+                User user = new User
+                {
+                    UserID = Preferences.Get("Accestoken", string.Empty),
+                    Email = Email,
+                    Password = Password
+                };
+                await App.Current.MainPage.Navigation.PushAsync(new MyTabbedPage());
+                
+            }
+            else
+            {
+
+            }
+
+
         }
         public async void SignUpClicked()
         {

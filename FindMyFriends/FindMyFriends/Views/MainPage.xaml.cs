@@ -19,6 +19,7 @@ namespace FindMyFriends
         async void Button_Clicked(System.Object sender, System.EventArgs e)
         {
             var permission = await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.LocationAlways>();
+
             if (permission == Xamarin.Essentials.PermissionStatus.Denied)
                 return;
 
