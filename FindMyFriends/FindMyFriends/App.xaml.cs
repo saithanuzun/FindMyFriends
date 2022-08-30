@@ -12,15 +12,14 @@ namespace FindMyFriends
         {
             InitializeComponent();
 
-            Preferences.Clear();
-            var AccesToken = Preferences.Get("AccesToken",String.Empty);
-            if(AccesToken!=String.Empty)
+            var AccesToken = Preferences.Get("AccesToken", String.Empty);
+            if (AccesToken == String.Empty)
             {
                 MainPage = new NavigationPage(new SignUpPage());
             }
             else
             {
-                MainPage = new MyTabbedPage();
+                MainPage = new NavigationPage( new MyTabbedPage());
             }
 
         }

@@ -5,6 +5,7 @@ using System.Windows.Input;
 using FindMyFriends.Models;
 using FindMyFriends.Services;
 using FindMyFriends.Views;
+using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -78,22 +79,12 @@ namespace FindMyFriends.ViewModels
         public async void LoginClicked()
         {
             FirebaseAuth Auth = new FirebaseAuth();
-            if(await Auth.Login(_email, Password))
+            var AccesToken = await Auth.Login(Email, Password);
+            if (AccesToken != null)
             {
-                User user = new User
-                {
-                    UserID = Preferences.Get("Accestoken", string.Empty),
-                    Email = Email,
-                    Password = Password
-                };
+                Preferences.Set("AccesToken", AccesToken);
                 await App.Current.MainPage.Navigation.PushAsync(new MyTabbedPage());
-                
             }
-            else
-            {
-
-            }
-
 
         }
         public async void SignUpClicked()

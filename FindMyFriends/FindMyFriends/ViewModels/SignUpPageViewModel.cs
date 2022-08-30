@@ -94,10 +94,10 @@ namespace FindMyFriends.ViewModels
 
         }
 
-        
+
         public SignUpPageViewModel()
         {
-            
+
 
 
         }
@@ -105,48 +105,49 @@ namespace FindMyFriends.ViewModels
 
         public async void SignUpClickedAsync()
         {
-            FirebaseAuth Auth = new FirebaseAuth();
-            if(Password==Password2 && Username!=null && Email!=null)
+            if (Password == Password2 && Username != null && Email != null)
             {
-                if (await Auth.SignUp(Email, Password))
+                FirebaseAuth Auth = new FirebaseAuth();
+                var AccesToken = await Auth.SignUp(Email, Password);
+
+                if (AccesToken != null)
                 {
+                    Preferences.Set("AccesToken", AccesToken);
                     User user = new User
                     {
-                         UserID = Preferences.Get("Accestoken", string.Empty),
-                         Username = Username,
-                         Email = Email,
-                         Password = Password
-                    };
+                        UserID = AccesToken,
+                        Username = Username,
+                        Email = Email,
+                        Password = Password,
+                        ImageUrl = Constants.DefaultProfileImageUrl,
+                        About = Constants.DefaultAbout,
+                        FriendsCount = 0,
+                };
 
-                    
+                FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
+                firebaseDatabase.putUser(user, AccesToken);
 
-                    await App.Current.MainPage.Navigation.PushAsync(new MyTabbedPage());
-                }
-                else
-                {
-
-                }
+                await App.Current.MainPage.Navigation.PushAsync(new MyTabbedPage());
             }
+        }
             else
             {
+                await App.Current.MainPage.DisplayAlert("Alert", "Error", "ok");
+    }
 
-            }
-            
-            
-           
-        }
-        public async void LoginClicked()
-        {
-            await App.Current.MainPage.Navigation.PushAsync(new LoginPage());
-        }
+}
+public async void LoginClicked()
+{
+    await App.Current.MainPage.Navigation.PushAsync(new LoginPage());
+}
 
-        public event PropertyChangedEventHandler PropertyChanged;
+public event PropertyChangedEventHandler PropertyChanged;
 
-        void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this,
-                new PropertyChangedEventArgs(propertyName));
-        }
+void OnPropertyChanged([CallerMemberName] string propertyName = null)
+{
+    PropertyChanged?.Invoke(this,
+        new PropertyChangedEventArgs(propertyName));
+}
     }
 }
 

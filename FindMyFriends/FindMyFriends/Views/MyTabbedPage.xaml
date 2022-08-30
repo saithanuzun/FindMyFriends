@@ -3,22 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:FindMyFriends.Views"
              x:Class="FindMyFriends.Views.MyTabbedPage"
-            NavigationPage.HasNavigationBar="False">
+            NavigationPage.HasNavigationBar="False"
+            SelectedTabColor="#ffb142"
+            BarBackgroundColor="#227093">
 
 
-    <NavigationPage Title="Profile" IconImageSource="user.png">
+    <NavigationPage Title="Profile" BarBackgroundColor="#227093"  IconImageSource="user.png">
         <x:Arguments>
             <local:ProfilePage />
         </x:Arguments>
     </NavigationPage>
 
-    <NavigationPage Title="Home" IconImageSource="home.png" >
+    <NavigationPage Title="Home"  BarBackgroundColor="#227093"  IconImageSource="home.png" >
         <x:Arguments>
             <local:HomePage />
         </x:Arguments>
     </NavigationPage>
 
-    <NavigationPage Title="Settings"  IconImageSource="settings.png">
+    <NavigationPage Title="Settings" BarBackgroundColor="#227093" IconImageSource="settings.png">
         <x:Arguments>
             <local:SettingsPage />
         </x:Arguments>

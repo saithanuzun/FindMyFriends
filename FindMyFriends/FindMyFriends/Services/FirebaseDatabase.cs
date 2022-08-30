@@ -1,7 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using FindMyFriends.Models;
+using Firebase.Auth;
 using Firebase.Database;
-using FoodOrderingApp.Services;
+using Firebase.Database.Query;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+using User = FindMyFriends.Models.User;
 
 namespace FindMyFriends.Services
 {
@@ -10,18 +18,124 @@ namespace FindMyFriends.Services
 
         public FirebaseClient firebaseClient = new Firebase.Database.FirebaseClient(Constants.FirebaseApiUrl);
 
-        public FirebaseDatabase()
-        {
 
+        public ObservableCollection<User> getUser()
+        {
+            var User = new ObservableCollection<User>();
+            var observable = firebaseClient
+                .Child("Users")
+                .AsObservable<User>()
+                .Subscribe(d => Console.WriteLine(d.Key));
+
+
+
+
+            return User;
         }
 
-        public void getUser()
+
+        public async Task<User> getUserAsync(string UserId)
         {
-           
+            User user = new User();
+
+            var getUser = (await firebaseClient
+                .Child("Users")
+                .OrderByKey()
+                .EqualTo(UserId)
+                .OnceAsync<User>());
+
+            foreach (var item in getUser)
+            {
+                user.UserID = item.Object.UserID;
+                user.Username = item.Object.Username;
+                user.Email = item.Object.Email;
+                user.Password = item.Object.Password;
+                user.ImageUrl = item.Object.ImageUrl;
+                user.About = item.Object.About;
+                user.FriendsCount = item.Object.FriendsCount;
+            }
+
+            return user;
         }
-        public void putUser()
+        public async Task<Collection<User>> getAllUserAsync()
         {
-           
+            var user = new Collection<User>();
+            var getUser = (await firebaseClient
+                .Child("Users")
+                .OnceAsync<User>()).Select(item => new User
+                {
+                    UserID = item.Object.UserID,
+                    Username = item.Object.Username,
+                    Email = item.Object.Email,
+                    Password = item.Object.Password,
+                    ImageUrl = item.Object.ImageUrl,
+                    About = item.Object.About,
+                    FriendsCount = item.Object.FriendsCount,
+
+                });
+
+            foreach (var item in getUser)
+            {
+                user.Add(item);
+            }
+
+            return user;
+        }
+
+
+        public async void putUser(User user, string UserId)
+        {
+            await firebaseClient
+               .Child("Users")
+               .Child(UserId)
+               .PutAsync(user);
+        }
+
+        public async void putLocation(Models.Location location, string UserId)
+        {
+            await firebaseClient
+                .Child("Locations")
+                .Child(UserId)
+                .PutAsync(location);
+        }
+        public async void putFriend(string UserId, string FriendId)
+        {
+            await firebaseClient
+                .Child("Friends")
+                .Child(UserId)
+                .Child(FriendId)
+                .PutAsync<AccesToken>(new AccesToken
+                {
+                    UserID = FriendId
+                });
+        }
+        public async void DeleteFriend(string UserId, string FriendId)
+        {
+            await firebaseClient
+                .Child("Friends")
+                .Child(UserId)
+                .Child(FriendId)
+                .DeleteAsync();
+
+
+        }
+        public async Task<Collection<AccesToken>> getFriends(string UserId)
+        {
+            Collection<AccesToken> collection = new Collection<AccesToken>();
+            var getFriends = (await firebaseClient
+                .Child("Friends")
+                .Child(UserId)
+                .OnceAsync<AccesToken>()).Select(item => new AccesToken
+                {
+                    UserID = item.Object.UserID
+                });
+
+            foreach (var item in getFriends)
+            {
+                collection.Add(item);
+            }
+            await App.Current.MainPage.DisplayAlert("ok", collection[0].UserID, "ok");
+            return collection;
         }
     }
 }

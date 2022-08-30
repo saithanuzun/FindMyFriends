@@ -5,22 +5,24 @@
     x:Class="FindMyFriends.Views.SignUpPage"
     NavigationPage.HasNavigationBar="False"
     BackgroundColor="#227093">
-   
+
+
+
 
     <ContentPage.Content>
         <StackLayout Margin="0,20,0,0" Padding="0,20,20,0">
 
-        <Label Text="Find My Friends" TextTransform="Uppercase" HorizontalOptions="CenterAndExpand" Margin="10,50,10,200"></Label>
-        <Entry  Text="{Binding Username}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Username"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
-        <Entry Text="{Binding Email}" WidthRequest="300" HeightRequest="50" Placeholder="Enter E-mail"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
-        <Entry Text="{Binding Password}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Password" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
-        <Entry Text="{Binding Password2}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Password Again" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"> </Entry>
+            <Label Text="Find My Friends" Margin="00,100,0,100" FontAttributes="Bold" FontSize="50" FontFamily="MyFont" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+            <Entry  Text="{Binding Username}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Username"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
+            <Entry Text="{Binding Email}" WidthRequest="300" HeightRequest="50" Placeholder="Enter E-mail"  HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Entry>
+            <Entry Text="{Binding Password}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Password" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"></Entry>
+            <Entry Text="{Binding Password2}" WidthRequest="300" HeightRequest="50" Placeholder="Enter Password Again" IsPassword="True" HorizontalOptions="Center" VerticalOptions="Center"></Entry>
 
-        <Button Text="Sign Up!" Command="{Binding SignUpClickedCommand}" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10"></Button>
-        <Label Text="Already Have An Account ?" TextColor="#f7f1e3" HorizontalOptions="CenterAndExpand"></Label>
-        <Button Text="Log In!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10" Command="{Binding LoginClickedCommand}"></Button>
+            <Button Text="Sign Up!" Command="{Binding SignUpClickedCommand}" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10"></Button>
+            <Label Text="Already Have An Account ?" TextColor="#f7f1e3" HorizontalOptions="CenterAndExpand"></Label>
+            <Button Text="Log In!" TextColor="#f7f1e3" BackgroundColor="#ffb142" Margin="25,10,25,10" Command="{Binding LoginClickedCommand}"></Button>
 
-        
+
 
 
 

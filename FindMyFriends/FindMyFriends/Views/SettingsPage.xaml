@@ -1,29 +1,44 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
     x:Class="FindMyFriends.Views.SettingsPage"
-    BackgroundColor="#227093">
+    NavigationPage.IconColor="#227093"
+    NavigationPage.HasNavigationBar="True"
+    BackgroundColor="#ffb142">
+
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="Find My Friends" FontAttributes="Bold" FontSize="27" FontFamily="MyFont" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.Content>
         <StackLayout>
 
-            <Label Text="Friends Count"></Label>
-            <Label Text="{Binding FriendsCount}"></Label>
-            <Label Text="Add Friend"></Label>
-            <Entry Placeholder="Enter Friend UID"></Entry>
-            <Button Text="Add"></Button>
-            <Label Text="Remove Friend"></Label>
-            <Entry Placeholder="Enter Friend UID"></Entry>
-            <Button Text="Remove"></Button>
-
-            
+            <controls:CircleImage
+                Margin="0,40,0,0" HorizontalOptions="Center" BorderThickness="4"
+                Source="{Binding ImageUrl}" Aspect="AspectFill" WidthRequest="150"
+                HeightRequest="150" BorderColor="White">
+            </controls:CircleImage>
+            <Button Command="{Binding ChangePictureCommand}" Text="Update Profile Picture" TextColor="White" Margin="80,0,80,0" BackgroundColor="#227093"></Button>
 
 
+            <Label Text="Add Friend" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+            <Entry Text="{Binding FriendUid}" Placeholder="Enter Friend UID" Margin="40,0,40,0"></Entry>
+            <StackLayout Orientation="Horizontal" Margin="40,0,40,0">
+                <Button Command="{Binding AddFriendCommand}" Text="Add" BackgroundColor="#227093" HorizontalOptions="Start" TextColor="White" WidthRequest="150"></Button>
+                <Button Command="{Binding RemoveFriendCommand}" Text="Remove" BackgroundColor="#227093" HorizontalOptions="EndAndExpand" WidthRequest="150" TextColor="White"></Button>
+            </StackLayout>
 
-            <Label Text="Change Password"></Label>
-            <Entry Placeholder="Enter Your Password"></Entry>
-            <Entry Placeholder="Enter New Password"></Entry>
-            <Button Text="Change"></Button>
+            <Label Text="Change Password" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold"></Label>
+            <Entry Text="{Binding CurrentPassword}" Placeholder="Enter Current Password" Margin="40,0,40,0"></Entry>
+            <Entry  Text="{Binding NewPassword}" Placeholder="Enter New Password" Margin="40,0,40,0"></Entry>
+            <Button Command="{Binding ChangePasswordCommand}" Text="Change" BackgroundColor="#227093" Margin="40,0,40,0" TextColor="White"></Button>
+
+            <Label Text="Delete My Account" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+            <Entry  Text="{Binding Password}" Placeholder="Enter Your Password" Margin="40,0,40,0"></Entry>
+            <Button  Command="{Binding DeleteAccountCommand}" Text="Delete"  BackgroundColor="#227093" TextColor="White" Margin="40,0,40,0"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

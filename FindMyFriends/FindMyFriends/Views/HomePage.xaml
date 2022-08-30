@@ -2,18 +2,95 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Controller="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
     x:Class="FindMyFriends.Views.HomePage"
-    NavigationPage.HasNavigationBar="True"
-    BackgroundColor="#227093">
+    BackgroundColor="#ffb142"
+    NavigationPage.HasNavigationBar="True">
+
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="Find My Friends" FontAttributes="Bold" FontSize="27" FontFamily="MyFont" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="#227093" />
+                                <Setter TargetName="_label" Property="Label.TextColor" Value="White" />
+                                <Setter TargetName="box"  Property="BoxView.BackgroundColor" Value="#ffb142" />
+                                <Setter TargetName="box2"  Property="BoxView.BackgroundColor" Value="#ffb142" />
+                                <Setter TargetName="box3"  Property="BoxView.BackgroundColor" Value="#ffb142" />
+
+                            </VisualState.Setters>
+
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
-            <ListView>
 
-            </ListView>
+        <StackLayout>
+            <CollectionView SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectionMode="Single"  ItemsSource="{Binding Carts}" Margin="0,0,0,0" SelectedItem="{Binding SelectedItem}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"></LinearItemsLayout>
+
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="AntiqueWhite"  HasShadow="True" CornerRadius="10"  >
+
+                            <StackLayout Orientation="Vertical" >
+                                <StackLayout  Orientation="Horizontal" >
+
+                                    <Controller:CircleImage Margin="10,10,10,10" Source="{Binding ImageUrl}" WidthRequest="70" HeightRequest="70">
+
+                                    </Controller:CircleImage>
+                                    <StackLayout Orientation="Vertical" >
+                                        <Label x:Name="_label"  Margin="0,0,0,10" FontAttributes="Bold" HorizontalOptions="Center" Text="{Binding Username}"></Label>
+                                        <Label  FontSize="12" Text="{Binding UserId}"></Label>
+                                        <BoxView x:Name="box2" HeightRequest="1" BackgroundColor="Black" Margin="0,0,0,0"></BoxView>
+                                        <Label  FontSize="14" FontAttributes="Bold" Text="{Binding About}"></Label>
+
+                                        <BoxView x:Name="box3" HeightRequest="1" BackgroundColor="Black" Margin="0,0,0,0"></BoxView>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label  Text="{Binding LastIssued}"></Label>
+
+                                        </StackLayout>
+
+                                    </StackLayout>
+
+                                </StackLayout>
+                                <BoxView  x:Name="box" HeightRequest="2" BackgroundColor="Black"></BoxView>
+
+                            </StackLayout>
+
+
+
+                        </Frame>
+
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+            <Button Text="Open Map"  TextColor="White" Command="{Binding MapCommand}" ></Button>
 
         </StackLayout>
-        
     </ContentPage.Content>
+
+
+
 </ContentPage>
 

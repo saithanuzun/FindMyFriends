@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    x:Class="FindMyFriends.Views.MapPage"
+    NavigationPage.HasNavigationBar="False"
+    >
+
+    <StackLayout >
+
+       <maps:Map x:Name="map"
+                  ItemsSource="{Binding Locations}">
+            <maps:Map.ItemTemplate>
+                <DataTemplate>
+                    <maps:Pin Position="{Binding Position}" 
+                              Address="{Binding Address}"
+                              Label="{Binding Description}" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </maps:Map>
+        <Button Text="Back" Command="{Binding BackButtonCommand}" TextColor="White" BackgroundColor="#227093"></Button>
+
+
+
+    </StackLayout>
+  
+
+
+
+
+
+</ContentPage>
+

@@ -3,24 +3,85 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="FindMyFriends.Views.ProfilePage"
-    BackgroundColor="#227093">
+    NavigationPage.HasNavigationBar="true"
+    xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+
+    BackgroundColor="#ffb142">
+
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="Find My Friends" FontAttributes="Bold" FontSize="27" FontFamily="MyFont" TextColor="White" HorizontalOptions="CenterAndExpand"></Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+
 
     <ContentPage.Content>
-        <StackLayout >
+        <StackLayout>
 
-            <Image></Image>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Username"></Label>
-                <Label Text="{Binding Username}"></Label>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="E-mail"></Label>
-                <Label Text="{Binding Email}"></Label>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Friends Count"></Label>
-                <Label Text="{Binding FriendsCount}"></Label>
-            </StackLayout>
+            <Frame BackgroundColor="AntiqueWhite"  HasShadow="True" Margin="10,10,10,10" CornerRadius="40" >
+
+                <StackLayout Orientation="Vertical" >
+                    <StackLayout  Orientation="Horizontal" >
+
+                        <controls:CircleImage Margin="10,10,10,10" Source="{Binding ImageUrl}" WidthRequest="70" HeightRequest="70">
+
+                        </controls:CircleImage>
+                        <StackLayout Orientation="Vertical" >
+                            <Label x:Name="_label"  Margin="0,0,0,10" FontAttributes="Bold" HorizontalOptions="Center" Text="{Binding Username}"></Label>
+                            <Label  FontSize="14" FontAttributes="Bold" Text="{Binding Email}"></Label>
+
+                            <Label  FontSize="12" Text="{Binding UserId}"></Label>
+
+                            <BoxView x:Name="box2" HeightRequest="1" BackgroundColor="Black" Margin="0,0,0,0"></BoxView>
+                            <Label  FontSize="14" FontAttributes="Bold" Text="{Binding About}"></Label>
+
+                            <BoxView x:Name="box3" HeightRequest="1" BackgroundColor="Black" Margin="0,0,0,0"></BoxView>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label  Text="{Binding LastIssued}"></Label>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+                    </StackLayout>
+                    <BoxView  x:Name="box" HeightRequest="2" BackgroundColor="Black"></BoxView>
+
+                </StackLayout>
+
+
+
+            </Frame>
+
+            <Frame CornerRadius="30" Margin="10,10,10,10" BackgroundColor="AntiqueWhite">
+                <StackLayout>
+                    <Label HorizontalOptions="Center" Text="About"  FontAttributes="Bold"></Label>
+                    <Entry BackgroundColor="AntiqueWhite" Placeholder="Enter New About"  FontAttributes="Bold"></Entry>
+                    <Button BackgroundColor="#227093" Text="Change About" TextColor="White"></Button>
+
+                </StackLayout>
+
+            </Frame>
+             <Frame CornerRadius="30" Margin="10,10,10,10" BackgroundColor="AntiqueWhite" VerticalOptions="EndAndExpand">
+                <StackLayout>
+                    <Label Text="Friends Count" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+
+                    <Label Text="{Binding FriendsCount}"  HorizontalOptions="Center"></Label>
+
+                </StackLayout>
+            </Frame>
+
+            <Frame CornerRadius="30" Margin="10,10,10,10" BackgroundColor="AntiqueWhite" VerticalOptions="EndAndExpand">
+                <StackLayout>
+                    <Label Text="UserID" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+
+                    <Label Text="{Binding UserId}"  HorizontalOptions="Center"></Label>
+
+                </StackLayout>
+            </Frame>
+            <Button VerticalOptions="End" CornerRadius="20"  Text="Share My User ID" TextColor="White" BackgroundColor="#227093" Margin="40,0,40,40"></Button>
 
         </StackLayout>
     </ContentPage.Content>

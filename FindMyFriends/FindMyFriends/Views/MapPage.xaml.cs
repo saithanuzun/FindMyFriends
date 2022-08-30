@@ -5,12 +5,12 @@ using Xamarin.Forms;
 
 namespace FindMyFriends.Views
 {
-    public partial class SettingsPage : ContentPage
+    public partial class MapPage : ContentPage
     {
-        public SettingsPage()
+        public MapPage()
         {
             InitializeComponent();
-            BindingContext = new SettingsPageViewModel();
+            BindingContext = new MapPageViewModel();
         }
     }
 }
