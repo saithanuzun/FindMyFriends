@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FindMyFriends.Services;
+using Firebase.Storage;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -151,8 +152,21 @@ namespace FindMyFriends.ViewModels
             ImageUrl = user.ImageUrl;
         }
 
-        void ChangePicture()
+        async void ChangePicture()
         {
+            FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
+            var user = await firebaseDatabase.getUserAsync(Preferences.Get("AccesToken", String.Empty));
+
+            var photo = await Xamarin.Essentials.MediaPicker.PickPhotoAsync();
+            if (photo == null)
+                return;
+
+            firebaseStorage firebaseStorage = new firebaseStorage();
+            var task = await firebaseStorage.UploadProfileImage(await photo.OpenReadAsync(), photo.FileName);
+            user.ImageUrl = task;
+            firebaseDatabase.putUser(user, user.UserID);
+
+            ImageUrl = user.ImageUrl;
 
         }
         async void AddFriend()
@@ -165,6 +179,8 @@ namespace FindMyFriends.ViewModels
                 if (item.UserID == FriendUid)
                 {
                     firebaseDatabase.putFriend(Preferences.Get("AccesToken", string.Empty), FriendUid);
+                    item.FriendsCount = item.FriendsCount++;
+                    firebaseDatabase.putUser(item, item.UserID);
                     await App.Current.MainPage.DisplayAlert("alert", "User Has Been Added", "ok");
                     return;
                 }
@@ -185,6 +201,8 @@ namespace FindMyFriends.ViewModels
                 if (item.UserID == FriendUid)
                 {
                     firebaseDatabase.DeleteFriend(Preferences.Get("AccesToken", string.Empty), FriendUid);
+                    item.FriendsCount = item.FriendsCount--;
+                    firebaseDatabase.putUser(item, item.UserID);
                     await App.Current.MainPage.DisplayAlert("alert", "User Has Been Deleted", "ok");
                     return;
                 }

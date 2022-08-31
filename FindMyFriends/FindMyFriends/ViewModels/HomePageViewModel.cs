@@ -22,7 +22,7 @@ namespace FindMyFriends.ViewModels
         private CardModel _selectedItem;
         private string _imageUrl, _username, _userId, _lastIssued;
         private ICommand _mapCommand, _refreshCommand;
-        private bool _isRefreshing;
+        private bool _isRefreshing,_isVisible;
 
         public bool IsRefreshing
         {
@@ -35,6 +35,20 @@ namespace FindMyFriends.ViewModels
             set
             {
                 _isRefreshing = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsVisible
+        {
+            get
+            {
+
+                return _isVisible;
+
+            }
+            set
+            {
+                _isVisible = value;
                 OnPropertyChanged();
             }
         }
@@ -139,6 +153,12 @@ namespace FindMyFriends.ViewModels
             Cards.Clear();
             FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
             var Friends =await firebaseDatabase.getFriends(Preferences.Get("AccesToken", String.Empty));
+            if(Friends.Count==0)
+            {
+                IsVisible = true;
+                return;
+            }
+            IsVisible = false;
             var Users =await firebaseDatabase.getAllUserAsync();
 
             foreach(var item in Friends)
@@ -164,10 +184,10 @@ namespace FindMyFriends.ViewModels
         
         public async void Map()
         {
-            FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
-            //await App.Current.MainPage.DisplayAlert("ok", SelectedItems.Count.ToString(), "ok");
-            await App.Current.MainPage.DisplayAlert("ok",SelectedItem.Username, "s");
-            //await App.Current.MainPage.Navigation.PushAsync(new MapPage());
+            if (SelectedItem == null)
+                return;
+
+            await App.Current.MainPage.Navigation.PushAsync(new MapPage(SelectedItem.UserId,SelectedItem.Username));
         }
 
 

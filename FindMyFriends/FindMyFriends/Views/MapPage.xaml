@@ -9,16 +9,32 @@
 
     <StackLayout >
 
-       <maps:Map x:Name="map"
-                  ItemsSource="{Binding Locations}">
-            <maps:Map.ItemTemplate>
-                <DataTemplate>
-                    <maps:Pin Position="{Binding Position}" 
-                              Address="{Binding Address}"
-                              Label="{Binding Description}" />
-                </DataTemplate>
-            </maps:Map.ItemTemplate>
-        </maps:Map>
+      <maps:Map
+               IsShowingUser="True" 
+               MoveToLastRegionOnLayoutChange="False" >
+          <x:Arguments>
+             <maps:MapSpan>
+                 <x:Arguments>
+                     <maps:Position>
+                         <x:Arguments>
+                             <x:Double>37.9628066</x:Double>
+                             <x:Double>-122.0194722</x:Double>
+                         </x:Arguments>
+                     </maps:Position>
+                     <x:Double>0.01</x:Double>
+                     <x:Double>0.01</x:Double>
+                 </x:Arguments>
+             </maps:MapSpan>
+         </x:Arguments>
+        
+         <maps:Map.Pins>
+             <maps:Pin Label="selam"
+                       Address="{Binding LastIssued}" 
+                       Type="Place" Position="{Binding Position}">
+                
+             </maps:Pin>
+         </maps:Map.Pins>
+     </maps:Map>
         <Button Text="Back" Command="{Binding BackButtonCommand}" TextColor="White" BackgroundColor="#227093"></Button>
 
 

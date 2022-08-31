@@ -128,6 +128,7 @@ namespace FindMyFriends.ViewModels
                 OnPropertyChanged();
             }
         }
+         
         private async void ChangeAbout()
         {
             FirebaseDatabase firebaseDatabase = new FirebaseDatabase();

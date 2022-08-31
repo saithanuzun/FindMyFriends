@@ -7,10 +7,10 @@ namespace FindMyFriends.Views
 {
     public partial class MapPage : ContentPage
     {
-        public MapPage()
+        public MapPage(string UserId,string Username)
         {
             InitializeComponent();
-            BindingContext = new MapPageViewModel();
+            BindingContext = new MapPageViewModel(UserId,Username);
         }
     }
 }
