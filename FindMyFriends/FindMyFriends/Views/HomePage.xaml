@@ -39,53 +39,59 @@
     <ContentPage.Content>
 
         <StackLayout>
-            <CollectionView SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectionMode="Single"  ItemsSource="{Binding Carts}" Margin="0,0,0,0" SelectedItem="{Binding SelectedItem}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"></LinearItemsLayout>
+            <RefreshView Command="{Binding RefreshCommand,Mode=TwoWay}" IsRefreshing="{Binding IsRefreshing,Mode=TwoWay}">
+                <CollectionView SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectionMode="Single"  ItemsSource="{Binding Cards}" Margin="0,0,0,0" SelectedItem="{Binding SelectedItem}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"></LinearItemsLayout>
 
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BackgroundColor="AntiqueWhite"  HasShadow="True" CornerRadius="10"  >
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
 
-                            <StackLayout Orientation="Vertical" >
-                                <StackLayout  Orientation="Horizontal" >
+                        <DataTemplate>
+                            <Frame BackgroundColor="AntiqueWhite"  HasShadow="True" CornerRadius="10"  >
 
-                                    <Controller:CircleImage Margin="10,10,10,10" Source="{Binding ImageUrl}" WidthRequest="70" HeightRequest="70">
+                                <StackLayout Orientation="Vertical" >
+                                    <StackLayout  Orientation="Horizontal" >
 
-                                    </Controller:CircleImage>
-                                    <StackLayout Orientation="Vertical" >
-                                        <Label x:Name="_label"  Margin="0,0,0,10" FontAttributes="Bold" HorizontalOptions="Center" Text="{Binding Username}"></Label>
-                                        <Label  FontSize="12" Text="{Binding UserId}"></Label>
-                                        <BoxView x:Name="box2" HeightRequest="1" BackgroundColor="Black" Margin="0,0,0,0"></BoxView>
-                                        <Label  FontSize="14" FontAttributes="Bold" Text="{Binding About}"></Label>
+                                        <Controller:CircleImage Margin="10,10,10,10" Source="{Binding ImageUrl}" WidthRequest="70" HeightRequest="70">
 
-                                        <BoxView x:Name="box3" HeightRequest="1" BackgroundColor="Black" Margin="0,0,0,0"></BoxView>
+                                        </Controller:CircleImage>
+                                        <StackLayout Orientation="Vertical" >
+                                            <Label x:Name="_label"  Margin="0,0,0,10" FontAttributes="Bold" HorizontalOptions="Center" Text="{Binding Username}"></Label>
+                                            <Label  FontSize="12" Text="{Binding UserId}"></Label>
+                                            <BoxView x:Name="box2" HeightRequest="1" BackgroundColor="Black" Margin="0,0,0,0"></BoxView>
+                                            <Label  FontSize="14" FontAttributes="Bold" Text="{Binding About}"></Label>
 
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label  Text="{Binding LastIssued}"></Label>
+                                            <BoxView x:Name="box3" HeightRequest="1" BackgroundColor="Black" Margin="0,0,0,0"></BoxView>
+
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label  Text="{Binding LastIssued}"></Label>
+
+                                            </StackLayout>
 
                                         </StackLayout>
 
                                     </StackLayout>
+                                    <BoxView  x:Name="box" HeightRequest="2" BackgroundColor="Black"></BoxView>
 
                                 </StackLayout>
-                                <BoxView  x:Name="box" HeightRequest="2" BackgroundColor="Black"></BoxView>
-
-                            </StackLayout>
 
 
 
-                        </Frame>
+                            </Frame>
 
 
-                    </DataTemplate>
+                        </DataTemplate>
 
-                </CollectionView.ItemTemplate>
+                    </CollectionView.ItemTemplate>
 
-            </CollectionView>
+                </CollectionView>
 
-            <Button Text="Open Map"  TextColor="White" Command="{Binding MapCommand}" ></Button>
+
+
+            </RefreshView>
+
+            <Button Text="Open Map"  BackgroundColor="#227093" Margin="10,10,10,10" TextColor="White" Command="{Binding MapCommand}" ></Button>
 
         </StackLayout>
     </ContentPage.Content>

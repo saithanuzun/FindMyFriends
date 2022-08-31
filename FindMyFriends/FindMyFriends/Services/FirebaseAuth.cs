@@ -10,7 +10,7 @@ namespace FindMyFriends.Services
     {
         public string WebApiKey = Constants.WebApiKey;
 
-        public  async Task<String> Login(string Username,string Password)
+        public async Task<String> Login(string Username, string Password)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace FindMyFriends.Services
             }
         }
 
-        public async Task<string> SignUp(String Username,String Password)
+        public async Task<string> SignUp(String Username, String Password)
         {
             try
             {
@@ -39,6 +39,35 @@ namespace FindMyFriends.Services
                 await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "ok");
                 return null;
             }
+        }
+        public async void changePassword(string UserId, string NewPassword)
+        {
+            try
+            {
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebApiKey));
+                await authProvider.ChangeUserPassword(UserId, NewPassword);
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "ok");
+            }
+
+        }
+
+        [Obsolete]
+        public async void deleteUser(string UserId)
+        {
+            try
+            {
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebApiKey));
+                await authProvider.DeleteUser(UserId);
+                return;
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "ok");
+            }
+
         }
 
     }

@@ -9,6 +9,7 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Location = FindMyFriends.Models.Location;
 using User = FindMyFriends.Models.User;
 
 namespace FindMyFriends.Services
@@ -19,19 +20,23 @@ namespace FindMyFriends.Services
         public FirebaseClient firebaseClient = new Firebase.Database.FirebaseClient(Constants.FirebaseApiUrl);
 
 
-        public ObservableCollection<User> getUser()
+        public void getUser(String UserId)
         {
             var User = new ObservableCollection<User>();
             var observable = firebaseClient
-                .Child("Users")
-                .AsObservable<User>()
-                .Subscribe(d => Console.WriteLine(d.Key));
+                .Child("Locations")
+                .Child(UserId)
+                .AsObservable<Location>()
+                .Subscribe(d =>
+                {
+
+                });
 
 
 
 
-            return User;
         }
+
 
 
         public async Task<User> getUserAsync(string UserId)
@@ -91,13 +96,37 @@ namespace FindMyFriends.Services
                .PutAsync(user);
         }
 
+
         public async void putLocation(Models.Location location, string UserId)
         {
             await firebaseClient
                 .Child("Locations")
                 .Child(UserId)
+                .Child(UserId)
                 .PutAsync(location);
         }
+        public async Task<Location> getLocationAsync(string UserId)
+        {
+            Location location = new Location();
+
+            var getUser = (await firebaseClient
+                .Child("Locations")
+                .Child(UserId)
+                .OrderByKey()
+                .EqualTo(UserId)
+                .OnceAsync<Location>());
+
+            foreach (var item in getUser)
+            {
+                location.UserID = item.Object.UserID;
+                location.PositionLatitude = item.Object.PositionLatitude;
+                location.PositionLongitude = item.Object.PositionLongitude;
+                location.IssuedDate = item.Object.IssuedDate;
+            }
+
+            return location;
+        }
+
         public async void putFriend(string UserId, string FriendId)
         {
             await firebaseClient
@@ -134,7 +163,6 @@ namespace FindMyFriends.Services
             {
                 collection.Add(item);
             }
-            await App.Current.MainPage.DisplayAlert("ok", collection[0].UserID, "ok");
             return collection;
         }
     }

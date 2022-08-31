@@ -1,7 +1,7 @@
 ﻿using System;
 namespace FindMyFriends.Models
 {
-    public class CartModel
+    public class CardModel
     {
 
         public string Username { get; set; }

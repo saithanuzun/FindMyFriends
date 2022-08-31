@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FindMyFriends.Models;
 using FindMyFriends.Services;
+using Plugin.Share;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -13,7 +14,8 @@ namespace FindMyFriends.ViewModels
 {
     public class ProfilePageViewModel : INotifyPropertyChanged
     {
-        private ICommand _textChangedCommand;
+        private ICommand _changeAboutCommand,_shareCommand;
+        private string _entry;
         private string _imageUrl;
         private string _username;
         private string _email;
@@ -21,23 +23,56 @@ namespace FindMyFriends.ViewModels
         private string _about;
         private int _friendsCount;
 
-        public ICommand DeleteAccountCommand
+
+
+        public ICommand ChangeAboutCommand
         {
             get
             {
-                if (_textChangedCommand == null)
+                if (_changeAboutCommand == null)
                 {
-                    _textChangedCommand = new Command(TextChanged);
+                    _changeAboutCommand = new Command(ChangeAbout);
                 }
-                return _textChangedCommand;
+                return _changeAboutCommand;
             }
             set
             {
-                _textChangedCommand = value;
+                _changeAboutCommand = value;
             }
         }
 
-       
+        public ICommand ShareCommand
+        {
+            get
+            {
+                if (_shareCommand == null)
+                {
+                    _shareCommand = new Command(async () =>
+                    {
+                        var massage = new Plugin.Share.Abstractions.ShareMessage();
+                        massage.Text = UserId;
+                        massage.Title = "Title";
+                        await CrossShare.Current.Share(massage);
+                    });
+                }
+                return _shareCommand;
+            }
+            set
+            {
+                _shareCommand = value;
+            }
+        }
+
+        public String Entry
+        {
+            get => _entry;
+            set
+            {
+                _entry = value;
+                OnPropertyChanged();
+            }
+        }
+
         public String Email
         {
             get => _email;
@@ -93,9 +128,14 @@ namespace FindMyFriends.ViewModels
                 OnPropertyChanged();
             }
         }
-        private void TextChanged()
+        private async void ChangeAbout()
         {
+            FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
+            var user = await firebaseDatabase.getUserAsync(Preferences.Get("AccesToken", String.Empty));
+            user.About = Entry;
 
+            firebaseDatabase.putUser(user, user.UserID);
+            setAsync();
         }
 
 

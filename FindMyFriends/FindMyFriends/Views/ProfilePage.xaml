@@ -58,8 +58,8 @@
             <Frame CornerRadius="30" Margin="10,10,10,10" BackgroundColor="AntiqueWhite">
                 <StackLayout>
                     <Label HorizontalOptions="Center" Text="About"  FontAttributes="Bold"></Label>
-                    <Entry BackgroundColor="AntiqueWhite" Placeholder="Enter New About"  FontAttributes="Bold"></Entry>
-                    <Button BackgroundColor="#227093" Text="Change About" TextColor="White"></Button>
+                    <Entry BackgroundColor="AntiqueWhite" Placeholder="Enter New About"  Text="{Binding Entry}" FontAttributes="Bold"></Entry>
+                    <Button BackgroundColor="#227093" Text="Change About" Command="{Binding ChangeAboutCommand}" TextColor="White"></Button>
 
                 </StackLayout>
 
@@ -81,7 +81,7 @@
 
                 </StackLayout>
             </Frame>
-            <Button VerticalOptions="End" CornerRadius="20"  Text="Share My User ID" TextColor="White" BackgroundColor="#227093" Margin="40,0,40,40"></Button>
+            <Button VerticalOptions="End" CornerRadius="20" Command="{Binding ShareCommand}"  Text="Share My User ID" TextColor="White" BackgroundColor="#227093" Margin="40,0,40,40"></Button>
 
         </StackLayout>
     </ContentPage.Content>

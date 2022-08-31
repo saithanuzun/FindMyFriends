@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using FindMyFriends.Models;
 using FindMyFriends.Services;
@@ -15,23 +16,28 @@ namespace FindMyFriends.ViewModels
 {
     public class HomePageViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<CartModel> Carts { get; private set; }
-        = new ObservableCollection<CartModel>();
+        public ObservableCollection<CardModel> Cards { get; private set; }
+        = new ObservableCollection<CardModel>();
 
-        private CartModel _selectedItem;
+        private CardModel _selectedItem;
         private string _imageUrl, _username, _userId, _lastIssued;
-        private ICommand _mapCommand, _selectionChangedCommand;
+        private ICommand _mapCommand, _refreshCommand;
+        private bool _isRefreshing;
 
-        public CartModel SelectedItem
+        public bool IsRefreshing
         {
-            get => _selectedItem;
+            get
+            {
+              
+                return _isRefreshing;
+            
+            }
             set
             {
-                _selectedItem = value;
+                _isRefreshing = value;
+                OnPropertyChanged();
             }
         }
-
-
         public ICommand MapCommand
         {
             get
@@ -48,26 +54,41 @@ namespace FindMyFriends.ViewModels
             }
 
         }
-        public ICommand SelectionChangedCommand
+        public ICommand RefreshCommand
         {
             get
             {
-                if (_selectionChangedCommand == null)
+                if (_refreshCommand == null)
                 {
-                    _selectionChangedCommand = new Command(SelectionChanged);
+                    _refreshCommand = new Command(async () => await RefreshItemsAsync());
                 }
-                return _mapCommand;
+                return _refreshCommand;
             }
             set
             {
-                _selectionChangedCommand = value;
+                _refreshCommand = value;
+                OnPropertyChanged();
             }
 
         }
 
-        private void SelectionChanged(object obj)
+        private async Task RefreshItemsAsync()
         {
-            
+            IsRefreshing = true;
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            setAsync();
+
+            IsRefreshing = false;
+        }
+
+        public CardModel SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+            }
         }
 
         public String Username
@@ -110,57 +131,37 @@ namespace FindMyFriends.ViewModels
         {
             setAsync();
 
-            
-            
 
         }
 
         public async void setAsync()
         {
+            Cards.Clear();
             FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
-            var user = await firebaseDatabase.getUserAsync(Preferences.Get("AccesToken", String.Empty));
-            Carts.Add(new CartModel
-            {
-                Username = user.Username,
-                UserId = user.UserID,
-                About = user.About,
-                ImageUrl = user.ImageUrl,
-                LastIssued = "30/08/2022 19:00:59"
-            });
-            Carts.Add(new CartModel
-            {
-                Username = user.Username,
-                UserId = user.UserID,
-                About = user.About,
-                ImageUrl = user.ImageUrl,
-                LastIssued = "30/08/2022 19:00:59"
-            });
-            Carts.Add(new CartModel
-            {
-                Username = user.Username,
-                UserId = user.UserID,
-                About = user.About,
-                ImageUrl = user.ImageUrl,
-                LastIssued = "30/08/2022 19:00:59"
-            });
-            Carts.Add(new CartModel
-            {
-                Username = user.Username,
-                UserId = user.UserID,
-                About = user.About,
-                ImageUrl = user.ImageUrl,
-                LastIssued = "30/08/2022 19:00:59"
-            });
-            Carts.Add(new CartModel
-            {
-                Username = user.Username,
-                UserId = user.UserID,
-                About = user.About,
-                ImageUrl = user.ImageUrl,
-                LastIssued = "30/08/2022 19:00:59"
-            });
+            var Friends =await firebaseDatabase.getFriends(Preferences.Get("AccesToken", String.Empty));
+            var Users =await firebaseDatabase.getAllUserAsync();
 
+            foreach(var item in Friends)
+            {
+                foreach(var item2 in Users)
+                {
+                    if(item.UserID==item2.UserID)
+                    {
+                        var location = await firebaseDatabase.getLocationAsync(item.UserID);
+                        Cards.Add(new CardModel
+                        {
+                            UserId=item2.UserID,
+                            Username=item2.Username,
+                            ImageUrl=item2.ImageUrl,
+                            About=item2.About,
+                            LastIssued= location.IssuedDate,
+                        });
+                        break;
+                    }
+                }
+            }
         }
+        
         public async void Map()
         {
             FirebaseDatabase firebaseDatabase = new FirebaseDatabase();

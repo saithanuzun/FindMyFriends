@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="FirebaseDatabase.net" Version="4.1.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.7.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -21,6 +21,7 @@
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2515" />
     <PackageReference Include="Xamarin.Forms.BehaviorsPack" Version="3.0.0" />
+    <PackageReference Include="Plugin.Share" Version="7.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
     <None Remove="Xam.Plugins.Forms.ImageCircle" />
     <None Remove="Xamarin.Forms.Maps" />
     <None Remove="Xamarin.Forms.BehaviorsPack" />
+    <None Remove="Plugin.Share" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\Yellowtail-Regular.ttf" />

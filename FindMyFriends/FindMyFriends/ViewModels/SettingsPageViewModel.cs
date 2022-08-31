@@ -118,7 +118,7 @@ namespace FindMyFriends.ViewModels
             {
                 if (_changePasswordCommand == null)
                 {
-                    _changePasswordCommand = new Command(ChangePassword);
+                    _changePasswordCommand = new Command(ChangePasswordAsync);
                 }
                 return _changePasswordCommand;
             }
@@ -134,7 +134,7 @@ namespace FindMyFriends.ViewModels
             {
                 if (_deleteAccountCommand == null)
                 {
-                    _deleteAccountCommand = new Command(DeleteAccount);
+                    _deleteAccountCommand = new Command(DeleteAccountAsync);
                 }
                 return _deleteAccountCommand;
             }
@@ -193,13 +193,42 @@ namespace FindMyFriends.ViewModels
             await App.Current.MainPage.DisplayAlert("alert", "User Has Not Been Found", "ok");
 
         }
-        void ChangePassword()
+        async void ChangePasswordAsync()
         {
+            FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
 
+            var user = await firebaseDatabase.getUserAsync(Preferences.Get("AccesToken", String.Empty));
+            if (CurrentPassword == user.Password)
+            {
+                user.Password = NewPassword;
+                firebaseDatabase.putUser(user, user.UserID);
+                FirebaseAuth auth = new FirebaseAuth();
+                auth.changePassword(user.UserID, NewPassword);
+                await App.Current.MainPage.DisplayAlert("Alert", "Password Has Been Changed", "ok");
+
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", "Error", "ok");
+
+            }
         }
-        void DeleteAccount()
-        {
 
+        [Obsolete]
+        async void DeleteAccountAsync()
+        {
+            FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
+
+            var user = await firebaseDatabase.getUserAsync(Preferences.Get("AccesToken", String.Empty));
+            if (user.Password == Password)
+            {
+                FirebaseAuth auth = new FirebaseAuth();
+                await App.Current.MainPage.DisplayAlert("Alert", "Account Has Been Deleted", "ok");
+                auth.deleteUser(Preferences.Get("AccesToken", String.Empty));
+                Preferences.Clear();
+                System.Environment.Exit(0);
+
+            }
         }
 
 
