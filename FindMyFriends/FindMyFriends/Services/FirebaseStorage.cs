@@ -10,17 +10,6 @@ namespace FindMyFriends.Services
     {
         FirebaseStorage Storage = new FirebaseStorage("findmyfriends-7a08b.appspot.com");
 
-
-        public async Task<String> upload(FileResult photo)
-        {
-
-            var task = Storage
-                .Child(photo.FileName)
-                .PutAsync(await photo.OpenReadAsync());
-
-            return await task;
-      
-        }
         public async Task<string> UploadProfileImage(Stream fileStream, string fileName)
         {
             var imageUrl = await Storage

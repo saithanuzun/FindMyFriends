@@ -23,7 +23,7 @@
                 <StackLayout Orientation="Vertical" >
                     <StackLayout  Orientation="Horizontal" >
 
-                        <controls:CircleImage Margin="10,10,10,10" Source="{Binding ImageUrl}" Aspect="AspectFill" WidthRequest="70" HeightRequest="70">
+                        <controls:CircleImage Margin="10,10,10,10" Source="{Binding ImageUrl}" Aspect="AspectFill" VerticalOptions="Center"  WidthRequest="90" HeightRequest="90">
 
                         </controls:CircleImage>
                         <StackLayout Orientation="Vertical" >

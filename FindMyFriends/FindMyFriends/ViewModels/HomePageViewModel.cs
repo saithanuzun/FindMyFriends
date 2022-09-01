@@ -22,15 +22,15 @@ namespace FindMyFriends.ViewModels
         private CardModel _selectedItem;
         private string _imageUrl, _username, _userId, _lastIssued;
         private ICommand _mapCommand, _refreshCommand;
-        private bool _isRefreshing,_isVisible;
+        private bool _isRefreshing, _isVisible;
 
         public bool IsRefreshing
         {
             get
             {
-              
+
                 return _isRefreshing;
-            
+
             }
             set
             {
@@ -152,42 +152,46 @@ namespace FindMyFriends.ViewModels
         {
             Cards.Clear();
             FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
-            var Friends =await firebaseDatabase.getFriends(Preferences.Get("AccesToken", String.Empty));
-            if(Friends.Count==0)
+            var Friends = await firebaseDatabase.getFriends(Preferences.Get("AccesToken", String.Empty));
+            if (Friends.Count == 0)
             {
                 IsVisible = true;
                 return;
             }
             IsVisible = false;
-            var Users =await firebaseDatabase.getAllUserAsync();
+            var Users = await firebaseDatabase.getAllUserAsync();
 
-            foreach(var item in Friends)
+            foreach (var item in Friends)
             {
-                foreach(var item2 in Users)
+                foreach (var item2 in Users)
                 {
-                    if(item.UserID==item2.UserID)
+                    if (item.UserID == item2.UserID)
                     {
                         var location = await firebaseDatabase.getLocationAsync(item.UserID);
                         Cards.Add(new CardModel
                         {
-                            UserId=item2.UserID,
-                            Username=item2.Username,
-                            ImageUrl=item2.ImageUrl,
-                            About=item2.About,
-                            LastIssued= location.IssuedDate,
+                            UserId = item2.UserID,
+                            Username = item2.Username,
+                            ImageUrl = item2.ImageUrl,
+                            About = item2.About,
+                            LastIssued = location.IssuedDate,
                         });
                         break;
                     }
                 }
             }
         }
-        
+
         public async void Map()
         {
             if (SelectedItem == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", "Please Select the User", "ok");
                 return;
 
-            await App.Current.MainPage.Navigation.PushAsync(new MapPage(SelectedItem.UserId,SelectedItem.Username));
+            }
+
+            await App.Current.MainPage.Navigation.PushAsync(new MapPage(SelectedItem.UserId, SelectedItem.Username));
         }
 
 

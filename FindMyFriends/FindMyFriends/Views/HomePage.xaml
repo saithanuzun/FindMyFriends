@@ -40,22 +40,24 @@
 
         <StackLayout>
             <Label Margin="0,30,0,0" Text="You Do Not Have Any Friends" IsVisible="{Binding IsVisible}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White"  FontAttributes="Bold" FontSize="Body"></Label>
+            <Label Margin="0,30,0,0" Text="Swipe Down to Refresh" IsVisible="{Binding IsVisible}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White"  FontAttributes="Bold" FontSize="Body"></Label>
+
             <RefreshView Command="{Binding RefreshCommand,Mode=TwoWay}" IsRefreshing="{Binding IsRefreshing,Mode=TwoWay}">
                 <CollectionView SelectionChangedCommand="{Binding SelectionChangedCommand}" SelectionMode="Single"  ItemsSource="{Binding Cards}" Margin="0,0,0,0" SelectedItem="{Binding SelectedItem}">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"></LinearItemsLayout>
+                        <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"></LinearItemsLayout>
 
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
 
                         <DataTemplate>
-                            <Frame BackgroundColor="AntiqueWhite"  HasShadow="True" CornerRadius="10"  >
+                            <Frame BackgroundColor="AntiqueWhite"  HasShadow="True" CornerRadius="0"  >
 
                                 <StackLayout Orientation="Vertical" >
                                     <StackLayout  Orientation="Horizontal" >
 
-                                        <Controller:CircleImage Margin="10,10,10,10" Source="{Binding ImageUrl}" WidthRequest="70" HeightRequest="70" Aspect="AspectFill">
-                                            
+                                        <Controller:CircleImage Margin="10,10,10,10" Source="{Binding ImageUrl}" VerticalOptions="Center" WidthRequest="90" HeightRequest="90" Aspect="AspectFill">
+
                                         </Controller:CircleImage>
                                         <StackLayout Orientation="Vertical" >
                                             <Label x:Name="_label"  Margin="0,0,0,10" FontAttributes="Bold" HorizontalOptions="Center" Text="{Binding Username}"></Label>
@@ -92,7 +94,7 @@
 
             </RefreshView>
 
-            <Button Text="Open Map"  BackgroundColor="#227093" Margin="10,10,10,10" TextColor="White" Command="{Binding MapCommand}" ></Button>
+            <Button Text="Open On Map"  BackgroundColor="#227093" Margin="10,10,10,10" TextColor="White" Command="{Binding MapCommand}" ></Button>
 
         </StackLayout>
     </ContentPage.Content>

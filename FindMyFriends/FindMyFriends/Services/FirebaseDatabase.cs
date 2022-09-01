@@ -20,24 +20,6 @@ namespace FindMyFriends.Services
         public FirebaseClient firebaseClient = new Firebase.Database.FirebaseClient(Constants.FirebaseApiUrl);
 
 
-        public void getUser(String UserId)
-        {
-            var User = new ObservableCollection<User>();
-            var observable = firebaseClient
-                .Child("Locations")
-                .Child(UserId)
-                .AsObservable<Location>()
-                .Subscribe(d =>
-                {
-
-                });
-
-
-
-
-        }
-
-
 
         public async Task<User> getUserAsync(string UserId)
         {
@@ -105,6 +87,7 @@ namespace FindMyFriends.Services
                 .Child(UserId)
                 .PutAsync(location);
         }
+
         public async Task<Location> getLocationAsync(string UserId)
         {
             Location location = new Location();

@@ -32,13 +32,13 @@
             </StackLayout>
 
             <Label Text="Change Password" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold"></Label>
-            <Entry Text="{Binding CurrentPassword}" Placeholder="Enter Current Password" Margin="40,0,40,0"></Entry>
-            <Entry  Text="{Binding NewPassword}" Placeholder="Enter New Password" Margin="40,0,40,0"></Entry>
+            <Entry Text="{Binding CurrentPassword}" IsPassword="True" Placeholder="Enter Current Password" Margin="40,0,40,0"></Entry>
+            <Entry  Text="{Binding NewPassword}" IsPassword="True" Placeholder="Enter New Password" Margin="40,0,40,0"></Entry>
             <Button Command="{Binding ChangePasswordCommand}" Text="Change" BackgroundColor="#227093" Margin="40,0,40,0" TextColor="White"></Button>
 
-            <Label Text="Delete My Account" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"></Label>
-            <Entry  Text="{Binding Password}" Placeholder="Enter Your Password" Margin="40,0,40,0"></Entry>
-            <Button  Command="{Binding DeleteAccountCommand}" Text="Delete"  BackgroundColor="#227093" TextColor="White" Margin="40,0,40,0"></Button>
+            <Label Text="Sign Out" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+            <Entry  Text="{Binding Password}" IsPassword="True" Placeholder="Enter Your Password" Margin="40,0,40,0"></Entry>
+            <Button  Command="{Binding DeleteAccountCommand}" Text="Sign Out"  BackgroundColor="#227093" TextColor="White" Margin="40,0,40,0"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

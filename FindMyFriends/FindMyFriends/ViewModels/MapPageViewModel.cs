@@ -15,19 +15,13 @@ namespace FindMyFriends.ViewModels
     public class MapPageViewModel : INotifyPropertyChanged
     {
 
-        private Position _position;
-        private string _lastIssued,_username,_userId;
 
-        public string LastIssued
-        {
-            get => _lastIssued;
-            set
-            {
-                _lastIssued = value;
-                OnPropertyChanged();
+        public ObservableCollection<Pin> Pins { get; set; } = new ObservableCollection<Pin>();
 
-            }
-        }
+        private string _username, _userId;
+        private ICommand _backButtonCommand;
+
+
         public string Username
         {
             get => _username;
@@ -39,16 +33,7 @@ namespace FindMyFriends.ViewModels
             }
         }
 
-        public Position Position
-        {
-            get => _position;
-            set
-            {
-                _position = value;
-                OnPropertyChanged();
 
-            }
-        }
 
         public string UserId
         {
@@ -57,10 +42,9 @@ namespace FindMyFriends.ViewModels
             {
                 _userId = value;
                 OnPropertyChanged();
-                
+
             }
         }
-        private ICommand _backButtonCommand;
 
 
         public ICommand BackButtonCommand
@@ -82,7 +66,7 @@ namespace FindMyFriends.ViewModels
         }
 
 
-        public MapPageViewModel(String UserId,string Username)
+        public MapPageViewModel(String UserId, string Username)
         {
             this.UserId = UserId;
             this.Username = Username;
@@ -94,9 +78,16 @@ namespace FindMyFriends.ViewModels
                 .AsObservable<Models.Location>()
                 .Subscribe(d =>
                 {
-                    Position = new Position(d.Object.PositionLatitude, d.Object.PositionLongitude);
-                    LastIssued = d.Object.IssuedDate;
+                    Pins.Clear();
+                    Pins.Add(new Pin
+                    {
+                        Position = new Position(d.Object.PositionLatitude, d.Object.PositionLongitude),
+                        Label = Username,
+                        Address = d.Object.IssuedDate
+
+                    });
                 });
+
         }
 
         private async void BackButton()
@@ -104,11 +95,12 @@ namespace FindMyFriends.ViewModels
             await App.Current.MainPage.Navigation.PopAsync();
         }
 
-      
 
 
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+
         void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this,

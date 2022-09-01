@@ -28,6 +28,7 @@
     <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Fonts\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xam.Plugin.Geolocator" />
@@ -40,6 +41,7 @@
     <None Remove="Xamarin.Forms.Maps" />
     <None Remove="Xamarin.Forms.BehaviorsPack" />
     <None Remove="Plugin.Share" />
+    <None Remove="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\Yellowtail-Regular.ttf" />

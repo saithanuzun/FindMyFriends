@@ -60,7 +60,7 @@ namespace FindMyFriends.Services
             try
             {
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebApiKey));
-                await authProvider.DeleteUser(UserId);
+                await  authProvider.DeleteUserAsync(UserId);
                 return;
             }
             catch (Exception ex)
