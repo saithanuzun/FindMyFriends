@@ -20,7 +20,6 @@ namespace FindMyFriends.Views
         {
             InitializeComponent();
             Helpers.Geolocation.Instance.LocationServices();
-
         }
         
     }

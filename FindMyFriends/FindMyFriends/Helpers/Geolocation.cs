@@ -34,7 +34,7 @@ namespace FindMyFriends.Helpers
                 await Plugin.Geolocator.CrossGeolocator.Current.StopListeningAsync();
             }
 
-            await Plugin.Geolocator.CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(20), 300);
+            await Plugin.Geolocator.CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(20), 100);
 
             Plugin.Geolocator.CrossGeolocator.Current.PositionChanged += Current_PositionChanged;
         }

@@ -179,7 +179,7 @@ namespace FindMyFriends.ViewModels
                 if (item.UserID == FriendUid)
                 {
                     firebaseDatabase.putFriend(Preferences.Get("AccesToken", string.Empty), FriendUid);
-                    item.FriendsCount = item.FriendsCount++;
+                    item.FriendsCount = ++item.FriendsCount;
                     firebaseDatabase.putUser(item, item.UserID);
                     await App.Current.MainPage.DisplayAlert("alert", "User Has Been Added", "ok");
                     return;
@@ -201,7 +201,7 @@ namespace FindMyFriends.ViewModels
                 if (item.UserID == FriendUid)
                 {
                     firebaseDatabase.DeleteFriend(Preferences.Get("AccesToken", string.Empty), FriendUid);
-                    item.FriendsCount = item.FriendsCount--;
+                    item.FriendsCount = --item.FriendsCount;
                     firebaseDatabase.putUser(item, item.UserID);
                     await App.Current.MainPage.DisplayAlert("alert", "User Has Been Deleted", "ok");
                     return;
